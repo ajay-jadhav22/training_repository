@@ -1,0 +1,66 @@
+<html>
+    <title>Library_Books</title>
+
+                <style>
+                    table, th, td{
+                        border:1px solid black;
+                    }
+                </style>
+    <body>
+        <table>
+            <tr>
+                <th>Book_Id</th>
+                <th>Book_Name</th>
+                <th>Book_Author</th>
+                <th>Book_Price</th>
+                <th>Published</th>
+                <th>Active</th>
+                <th>Actions</th>
+        
+            </tr>
+            {% for book in all_books %}
+            {% csrf_token %}
+            <tr>
+                <td>{{book.id}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.price}}</td>
+                <td>{{book.is_pub}}</td>
+                <td>{{book.is_active}}</td>
+                <td>
+                    {% if not inactive %}
+                    <form action="{% url 'update_book' book.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Update" class="btn btn-primary">
+                    </form>
+                    <form action="{% url 'hard_delete' book.id %}" method="post">
+                        {% csrf_token %} 
+                        <input type="submit" value="Hard-Delete">
+                    </form>
+                    <form action="{% url 'soft_delete' book.id %}" method="post">
+                        {% csrf_token %} 
+                        <input type="submit" value="Soft-Delete">
+                    </form>
+                    {% else %} 
+                    <form action="{% url 'restore_book' book.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Restore">
+
+                    </form>
+                    {% endif %}
+                </td>
+      
+            </tr>
+            {% endfor %}
+        </table>
+
+    </form>
+        
+<a href="{% url 'home_page' %}"> Home_Page</a> <br>
+<a  href="{% url 'inactive_books' %}" class="btn btn-info"> Inactive_Books</a> <br>
+<a href="{% url 'all_active_books' %}">All_Active_Books</a>
+<a href="{% url 'all_books' %}" > All_Books</a>
+
+
+</body>
+</html>

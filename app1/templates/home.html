@@ -1,0 +1,30 @@
+<html>
+    <title>Home_Page</title>
+    <body>
+        
+    <!-- <h1>Hello</h1> -->
+    <form action="{% url 'home_page' %}" method="post">
+        {% csrf_token %}
+        Book_Id  :- <label class="required"></label><input type="number" name="b_id" readonly required> <br>
+        Book_Name:- <label class="required"></label><input type="text" name="b_name" required><br>
+        Book_Price:- <label class="required"></label><input type="number" name="b_price" required> <br>
+        Book_Author:- <label class="required"></label><input type="text" name="b_author" required><br>
+        Quantity:- <label class="required"></label><input type="number" name="b_quanty" id="" required> <br>
+        Published:- Yes<label class="required"></label> <input type="radio" name="b_published" value="yes"> No <input type="radio" name="b_published" value="no" required><br>
+        
+        
+        
+        Active:- Yes<label class="required"></label> <input type="radio" name="b_active" value="yes"> No <input type="radio" name="b_active" value="no" required><br>
+
+        <input type="submit" class="btn btn-primary"  name="Submit">
+
+
+
+    </form>
+
+    
+</body>
+
+    <a href="{% url 'all_books' %}"> All_Books</a><br>
+    <a href="{% url 'all_active_books' %}">All_Active_Books</a>
+</html>
